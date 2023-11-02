@@ -1,5 +1,5 @@
 import './App.css'
-import List from './assets/components/listAdder/List'
+import List from './components/listAdder/List'
 
 function App() {
   return (
