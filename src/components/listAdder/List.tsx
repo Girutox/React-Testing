@@ -53,7 +53,7 @@ const List = () => {
         <h1>Testing en React con Vitest</h1>
         <h2>Añadir y eliminar elementos de una lista</h2>
 
-        <form onSubmit={handleSubmit} aria-label='Añadir elementos a la lista'>
+        <form onSubmit={handleSubmit} aria-label="Añadir elementos a la lista">
           <label>
             Elemento a introducir:
             <input

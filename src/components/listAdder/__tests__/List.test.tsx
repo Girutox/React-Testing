@@ -1,18 +1,17 @@
 import { describe, it, expect } from "vitest"
 import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom/vitest'
 
 import List from "../List"
 
-describe('test headings', () => {
-  it.skip("should render a heading element level 1 with the text: 'Testing en React con Vitest'", () => {
+describe('<List />', () => {
+  it("should render a heading element level 1 with the text: 'Testing en React con Vitest'", () => {
     // Arrange
     render(<List />)
   
     // Act
     // const element = screen.getByText(/Testing en React con Vitest/i)
     const element = screen.getByRole('heading', { level: 1, name: /Testing en React con Vitest/i })
-  
+
     // Assert
     expect(element).toBeInTheDocument()
   })
@@ -26,5 +25,29 @@ describe('test headings', () => {
   
     // Assert
     expect(element).toBeInTheDocument()
+  })
+
+  it('should render the default form', () => {
+    render(<List />)
+
+    const formElement = screen.getByRole('form')
+
+    expect(formElement).toBeInTheDocument()
+  })
+
+  it("should render an input control with the label: 'Elemento a introducir'", () => {
+    render(<List />)
+
+    const inputElement = screen.getByRole('textbox', { name: /Elemento a introducir:/i })
+
+    expect(inputElement).toBeInTheDocument()
+  })
+
+  it("should render a button to submit the form with the text: 'Añadir elemento a la lista'", () => {
+    render(<List />)
+
+    const buttonElement = screen.getByRole('button', { name: /Añadir elemento a la lista/i })
+
+    expect(buttonElement).toBeInTheDocument()
   })
 })
