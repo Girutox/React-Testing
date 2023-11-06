@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest"
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 
 import List from "../List"
 
@@ -49,5 +50,65 @@ describe('<List />', () => {
     const buttonElement = screen.getByRole('button', { name: /Añadir elemento a la lista/i })
 
     expect(buttonElement).toBeInTheDocument()
+  })
+
+  it('should render a text of "No hay elementos en la lista" if loaded for the first time', () => {
+    render(<List />)
+
+    const textElement = screen.getByText(/No hay elementos en la lista/i)
+
+    expect(textElement).toBeInTheDocument()
+  })
+
+  // it('should add a new item to the list when the form is submitted', async () => {
+  //   render(<List />)
+
+  //   const item = 'Dark Souls 5'
+  //   const inputElement = screen.getByRole('textbox', { name: /Elemento a introducir:/i }) as HTMLInputElement
+  //   const buttonElement = screen.getByRole('button', { name: /Añadir elemento a la lista/i }) as HTMLButtonElement
+
+  //   inputElement.value = item
+
+  //   fireEvent(buttonElement, new MouseEvent('click'))
+
+  //   const itemElement = await screen.findByText(item)
+
+  //   expect(itemElement).toBeInTheDocument()
+  // })
+
+  it('should add a new item to the list when the form is submitted', async () => {
+    render(<List />)
+
+    const item = 'Dark Souls 5'
+    const inputElement = screen.getByRole('textbox', { name: /Elemento a introducir:/i }) as HTMLInputElement
+    const buttonElement = screen.getByRole('button', { name: /Añadir elemento a la lista/i }) as HTMLButtonElement
+
+    inputElement.value = item
+
+    await userEvent.click(buttonElement)
+
+    const itemElement = screen.getByText(item)
+
+    expect(itemElement).toBeInTheDocument()
+  })
+
+  it('should delete the item when the proper button has been clicked', async () => {
+    render(<List />)
+
+    const item = 'Dark Souls 5'
+    const inputElement = screen.getByRole('textbox', { name: /Elemento a introducir:/i }) as HTMLInputElement
+    const buttonElement = screen.getByRole('button', { name: /Añadir elemento a la lista/i }) as HTMLButtonElement
+
+    inputElement.value = item
+    await userEvent.click(buttonElement)
+
+    const emptyTextElement1 = screen.queryByText(/No hay elementos en la lista/i)
+    expect(emptyTextElement1).not.toBeInTheDocument()
+
+    const deleteButtonElement = screen.getByRole('button', { name: /X/i })
+    await userEvent.click(deleteButtonElement)
+
+    const emptyTextElement2 = screen.getByText(/No hay elementos en la lista/i)
+    expect(emptyTextElement2).toBeInTheDocument()
   })
 })

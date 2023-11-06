@@ -69,26 +69,26 @@ const List = () => {
 
       <section>
         <h2>Lista de elementos</h2>
-          {
-            items.length === 0 ? (
-              <p>
-                <strong>No hay elementos en la lista.</strong>
-              </p>
-            ) : (
-              <ul>
-                {
-                  items.map((item) => {
-                    return (
-                      <Item
-                        {...item}
-                        handleClick={createHandleRemoveItem(item.id)}
-                        key={item.id} />
-                    )
-                  })
-                }
-              </ul>
-            )
-          }
+        {
+          items.length === 0 ? (
+            <p>
+              <strong>No hay elementos en la lista.</strong>
+            </p>
+          ) : (
+            <ul>
+              {
+                items.map((item) => {
+                  return (
+                    <Item
+                      {...item}
+                      handleClick={createHandleRemoveItem(item.id)}
+                      key={item.id} />
+                  )
+                })
+              }
+            </ul>
+          )
+        }
       </section>
     </main>
   )

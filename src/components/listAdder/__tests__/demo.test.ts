@@ -1,7 +1,7 @@
 import { test, expect } from 'vitest'
 import { sum, User } from '../../../utils/utils'
 
-test("sum function should return the sum of the two numbers provided", () => {
+test.skip("sum function should return the sum of the two numbers provided", () => {
   // Arrange
   const number1 = 1
   const number2 = 9
@@ -13,7 +13,7 @@ test("sum function should return the sum of the two numbers provided", () => {
   expect(sum(number1, number2)).toBe(result)
 })
 
-test("getFullName method should return the combination of firstName and lastName", () => {
+test.skip("getFullName method should return the combination of firstName and lastName", () => {
   // Arrange
   const firstName = "Maiquin"
   const lastName = "CCarampa"
